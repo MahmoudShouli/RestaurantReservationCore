@@ -13,5 +13,14 @@ public class Methods(RestaurantReservationDbContext context)
             .ToListAsync();
         return managers;
     }
+
+    public async Task<List<Reservation>> GetReservationsByCustomer(int customerId)
+    {
+        var customer = await context.Customers
+            .Include(c => c.Reservations)
+            .FirstOrDefaultAsync(c => c.CustomerId == customerId);
+        
+        return customer?.Reservations ?? new List<Reservation>();
+    }
     
 }
