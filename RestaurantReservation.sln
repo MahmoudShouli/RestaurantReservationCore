@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantReservation", "RestaurantReservation.csproj", "{AE9918F3-C9C0-43A8-904E-8AD5C0810268}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantReservation.Db", "RestaurantReservation.Db\RestaurantReservation.Db.csproj", "{279AB638-C430-45EC-9886-0107EFF86723}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantReservation", "RestaurantReservation\RestaurantReservation.csproj", "{C2524129-D411-4B8E-A69B-8979F17F2F24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,13 +10,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AE9918F3-C9C0-43A8-904E-8AD5C0810268}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE9918F3-C9C0-43A8-904E-8AD5C0810268}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AE9918F3-C9C0-43A8-904E-8AD5C0810268}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE9918F3-C9C0-43A8-904E-8AD5C0810268}.Release|Any CPU.Build.0 = Release|Any CPU
 		{279AB638-C430-45EC-9886-0107EFF86723}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{279AB638-C430-45EC-9886-0107EFF86723}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{279AB638-C430-45EC-9886-0107EFF86723}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{279AB638-C430-45EC-9886-0107EFF86723}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2524129-D411-4B8E-A69B-8979F17F2F24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2524129-D411-4B8E-A69B-8979F17F2F24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2524129-D411-4B8E-A69B-8979F17F2F24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2524129-D411-4B8E-A69B-8979F17F2F24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
