@@ -1,2 +1,2 @@
-# RestaurantReservation
-EF Core application for applying ORM's.
+# RestaurantReservationCore
+EF Core application 
