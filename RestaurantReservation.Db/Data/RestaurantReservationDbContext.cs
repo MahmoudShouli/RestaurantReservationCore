@@ -19,6 +19,14 @@ public class RestaurantReservationDbContext : DbContext
     public DbSet<OrderItem> OrderItems { get; set; }
     public DbSet<MenuItem> MenuItems { get; set; }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlServer("Server=localhost;Database=RestaurantDb;Trusted_Connection=True;Encrypt=False;");
+        }
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
