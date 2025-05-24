@@ -16,7 +16,7 @@ var options = new DbContextOptionsBuilder<RestaurantReservationDbContext>()
 using var context = new RestaurantReservationDbContext(options);
 
 var methods = new Methods(context);
-await methods.ListOrdersAndMenuItems(3);
+
 
 
 
