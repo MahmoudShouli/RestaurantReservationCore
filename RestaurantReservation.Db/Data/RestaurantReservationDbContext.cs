@@ -18,23 +18,53 @@ public class RestaurantReservationDbContext : DbContext
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
     public DbSet<MenuItem> MenuItems { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (!optionsBuilder.IsConfigured)
-        {
-            optionsBuilder.UseSqlServer("Server=localhost;Database=RestaurantDb;Trusted_Connection=True;Encrypt=False;");
-        }
-    }
-
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-
-        // OrderItem: Composite Key
-        modelBuilder.Entity<OrderItem>()
-            .HasKey(oi => new { oi.OrderId, oi.MenuItemId });
         
-        // I followed EF Core conventions for now so not many configurations are required
+        modelBuilder.Entity<MenuItem>()
+            .HasKey(mi => new { mi.ItemId });
+        
+        // Only delete reservations if their customer is deleted, otherwise restrict the deletion
+        modelBuilder.Entity<Reservation>()
+            .HasOne(r => r.Customer)
+            .WithMany(c => c.Reservations)
+            .HasForeignKey(r => r.CustomerId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Reservation>()
+            .HasOne(r => r.Restaurant)
+            .WithMany(rest => rest.Reservations)
+            .HasForeignKey(r => r.RestaurantId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Reservation>()
+            .HasOne(r => r.Table)
+            .WithMany(t => t.Reservations)
+            .HasForeignKey(r => r.TableId)
+            .OnDelete(DeleteBehavior.Restrict);
+        
+        modelBuilder.Entity<OrderItem>()
+            .HasOne(oi => oi.Order)
+            .WithMany(o => o.OrderItems)
+            .HasForeignKey(oi => oi.OrderId)
+            .OnDelete(DeleteBehavior.Cascade);
+        
+        modelBuilder.Entity<OrderItem>()
+            .HasOne(oi => oi.MenuItem)
+            .WithMany(mi =>mi.OrderItems)
+            .HasForeignKey(oi => oi.ItemId)
+            .OnDelete(DeleteBehavior.NoAction);
+        
+        // Decimal types
+        modelBuilder.Entity<Order>()
+            .Property(o => o.OrderPrice)
+            .HasColumnType("decimal(18,2)");
+        
+        modelBuilder.Entity<MenuItem>()
+            .Property(mi => mi.Price)
+            .HasColumnType("decimal(18,2)");
+        
     }
 }
