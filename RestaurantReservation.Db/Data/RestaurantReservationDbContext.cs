@@ -26,7 +26,7 @@ public class RestaurantReservationDbContext : DbContext
         modelBuilder.Entity<MenuItem>()
             .HasKey(mi => new { mi.ItemId });
         
-        // Only delete reservations if their customer is deleted, otherwise restrict the deletion
+        // To prevent multiple cascade paths issue
         modelBuilder.Entity<Reservation>()
             .HasOne(r => r.Customer)
             .WithMany(c => c.Reservations)
