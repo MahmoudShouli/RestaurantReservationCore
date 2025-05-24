@@ -22,5 +22,23 @@ public class Methods(RestaurantReservationDbContext context)
         
         return customer?.Reservations ?? new List<Reservation>();
     }
+
+    public async Task ListOrdersAndMenuItems(int reservationId)
+    {
+        var reservation = await context.Reservations
+            .Include(r => r.Orders)
+            .ThenInclude(o => o.OrderItems)
+            .ThenInclude(oi => oi.MenuItem)
+            .FirstOrDefaultAsync(r => r.ReservationId == reservationId);
+
+        foreach (var order in reservation.Orders)
+        {
+            foreach (var orderItem in order.OrderItems)
+            {
+                Console.WriteLine(order.OrderId + " " + orderItem.MenuItem.Name);
+            }
+        }
+        
+    }
     
 }

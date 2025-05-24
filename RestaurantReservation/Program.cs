@@ -16,11 +16,7 @@ var options = new DbContextOptionsBuilder<RestaurantReservationDbContext>()
 using var context = new RestaurantReservationDbContext(options);
 
 var methods = new Methods(context);
-var result = await methods.GetReservationsByCustomer(4);
-foreach (var r in result)
-{
-    Console.WriteLine($"Date: {r.ReservationDate}");
-}
+await methods.ListOrdersAndMenuItems(3);
 
 
 
