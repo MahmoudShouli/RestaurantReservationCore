@@ -40,5 +40,24 @@ public class Methods(RestaurantReservationDbContext context)
         }
         
     }
+
+    public async Task<decimal> CalculateAverageOrderAmount(int employeeId)
+    {
+        var employee = await context.Employees
+            .Include(e => e.Orders)
+            .FirstOrDefaultAsync(e => e.EmployeeId == employeeId);
+        
+        if (employee == null || employee.Orders.Count == 0)
+            return 0;
+        
+        var orders = employee.Orders;
+
+        var total = employee.Orders.Sum(o => o.TotalAmount);
+        var average = total / employee.Orders.Count;
+        
+        return Math.Round(average, 2);
+    }
+    
+    
     
 }
